@@ -20,7 +20,7 @@ class Libtiff < Formula
 
   uses_from_macos "zlib"
 
-  # Fix build on Monterey. Remove at next release.
+  # Fix build on Monterey; remove at next release.
   # Adapted from (to apply to the source tarball):
   # https://gitlab.com/libtiff/libtiff/-/commit/b25618f6fcaf5b39f0a5b6be3ab2fb288cf7a75b
   patch :DATA

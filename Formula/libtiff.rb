@@ -20,7 +20,15 @@ class Libtiff < Formula
 
   uses_from_macos "zlib"
 
+  # Fix build on Monterey. Remove at next release.
+  # Adapted from (to apply to the source tarball):
+  # https://gitlab.com/libtiff/libtiff/-/commit/b25618f6fcaf5b39f0a5b6be3ab2fb288cf7a75b
+  patch :DATA
+
   def install
+    # This is needed to apply the patch. Remove when the patch is no longer needed.
+    system "autoreconf", "--force", "--install", "--verbose"
+
     args = %W[
       --prefix=#{prefix}
       --disable-dependency-tracking
@@ -49,3 +57,39 @@ class Libtiff < Formula
     assert_match(/ImageWidth.*10/, shell_output("#{bin}/tiffdump test.tif"))
   end
 end
+
+__END__
+diff --git a/configure.ac b/configure.ac
+index 9e419fba12e2773a915abe0861fe95c9569ce00f..9e9927925821327674df9cef70fa7cd82c8b1985 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1080,7 +1080,7 @@ dnl ---------------------------------------------------------------------------
+ 
+ AC_SUBST(LIBDIR)
+ 
+-AC_CONFIG_HEADERS([config.h libtiff/tif_config.h libtiff/tiffconf.h port/libport_config.h])
++AC_CONFIG_HEADERS([config/config.h libtiff/tif_config.h libtiff/tiffconf.h port/libport_config.h])
+ 
+ AC_CONFIG_FILES([Makefile \
+ 		 build/Makefile \
+@@ -1095,15 +1095,15 @@ AC_CONFIG_FILES([Makefile \
+ 		 contrib/stream/Makefile \
+ 		 contrib/tags/Makefile \
+ 		 contrib/win_dib/Makefile \
+-                 html/Makefile \
++		 html/Makefile \
+ 		 html/images/Makefile \
+ 		 html/man/Makefile \
+-                 libtiff-4.pc \
+-                 libtiff/Makefile \
+-                 man/Makefile \
++		 libtiff-4.pc \
++		 libtiff/Makefile \
++		 man/Makefile \
+ 		 port/Makefile \
+ 		 test/Makefile \
+-                 tools/Makefile])
++		 tools/Makefile])
+ AC_OUTPUT
+ 
+ dnl ---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-# Robbfitzsimmons Gdal-zstd
+# GDAL with ZSTD codec support for macOS
 
 ## How do I install these formulae?
 

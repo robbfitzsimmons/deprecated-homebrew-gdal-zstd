@@ -31,6 +31,7 @@ class Libtiff < Formula
 
     args = %W[
       --prefix=#{prefix}
+      --disable-lzma
       --disable-dependency-tracking
       --with-jpeg-include-dir=#{Formula["jpeg"].opt_include}
       --with-jpeg-lib-dir=#{Formula["jpeg"].opt_lib}

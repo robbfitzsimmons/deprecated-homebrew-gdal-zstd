@@ -11,6 +11,12 @@ class Libtiff < Formula
     regex(/href=.*?tiff[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 
+  bottle do
+    root_url "https://github.com/robbfitzsimmons/homebrew-gdal-zstd/releases/download/libtiff-4.3.0"
+    rebuild 1
+    sha256 cellar: :any, big_sur: "6b10f52ac461230dc5ec54a65d9e8a38a6a019e734307f6e1641b812b93c43c0"
+  end
+
   # autoconf, automake, and libtool are needed for the patch.
   # Remove these dependencies when the patch is no longer needed.
   depends_on "autoconf@2.69" => :build

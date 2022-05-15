@@ -39,7 +39,7 @@ class Gdal < Formula
   depends_on "poppler-qt5"
   depends_on "proj"
   depends_on "python@3.9"
-  depends_on "robbfitzsimmons/gdal-zstd/libtiff"
+  depends_on "libtiff"
   depends_on "sqlite"
   depends_on "unixodbc"
   depends_on "webp"
